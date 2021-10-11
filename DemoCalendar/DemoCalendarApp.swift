@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct DemoCalendarApp: App {
+    @StateObject var taskClass = TaskClass()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(taskClass)
         }
     }
 }
