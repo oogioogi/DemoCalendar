@@ -14,7 +14,9 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    @StateObject static var taskClass = TaskClass()
     static var previews: some View {
         ContentView()
+            .environmentObject(taskClass)
     }
 }

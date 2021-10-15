@@ -21,7 +21,17 @@ struct Home: View {
         .overlay (
             HStack {
                 Button(action: {
-                    taskClass.tasks.append(TaskMetaData(task: [Task(title: "Annul")], taskDate: currentDate))
+                    if let metaDataIndex = taskClass.tasks.firstIndex(where: { metaData in
+                        metaData.taskDate == currentDate
+                    }) {
+                        debugPrint(metaDataIndex)
+                        taskClass.tasks[metaDataIndex].task.append(Task(title: "New Annul"))
+                       
+                    }else {
+                        taskClass.tasks.append(TaskMetaData(task: [Task(title: "Annul")], taskDate: currentDate))
+                    }
+                    //동일 날짜는 Task만을 추가 한다
+
                 }, label: {
                     Text("Add Task")
                         .fontWeight(.bold)

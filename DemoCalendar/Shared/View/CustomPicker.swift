@@ -76,10 +76,10 @@ struct CustomPicker: View {
                     .font(.title2).bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, 10)
-                if let task = taskClass.tasks.first(where: { taskMetaData in
+                if let taskMetaData = taskClass.tasks.first(where: { taskMetaData in
                     return isSameDay(date1: taskMetaData.taskDate, date2: currrentDate)
                 }) {
-                    ForEach(task.task) { task in
+                    ForEach(taskMetaData.task) { task in
                         VStack(alignment: .leading, spacing: 10) {
                             // for custom Time
                             Text(task.time.addingTimeInterval(TimeInterval(CGFloat.random(in: 0...5000))), style: .time)
@@ -192,8 +192,10 @@ extension Date {
 
 
 struct CustomPicker_Previews: PreviewProvider {
+    @StateObject static var taskClass: TaskClass = TaskClass()
     static var previews: some View {
-        Home()
+        ContentView()
+            .environmentObject(taskClass)
     }
 }
 
